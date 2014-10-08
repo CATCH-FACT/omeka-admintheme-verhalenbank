@@ -5,6 +5,8 @@
 * Free to use under the MIT license.
 * http://www.opensource.org/licenses/mit-license.php
 * 5/20/2011
+*
+* 2014-06-25 - EDITED BY IWE MUISER: WIDENED BASE GRID TO 1200px
 */
 
 
@@ -21,7 +23,7 @@
 /* #Base 960 Grid 
 ================================================== */
 
-    .container { position: relative; width: 960px; margin: 0 auto; padding: 0; }
+    .container { position: relative; width: 1200px; margin: 0 auto; padding: 0; }
     .column, .columns { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
     .row { margin-bottom: 20px; }
     
@@ -41,12 +43,12 @@
     .container-twelve .two.columns                         { width: 140px; }
     .container-twelve .three.columns                     { width: 220px; }
     .container-twelve .four.columns                     { width: 300px; }
-    .container-twelve .five.columns                     { width: 380px; }
-    .container-twelve .six.columns                         { width: 460px; }
-    .container-twelve .seven.columns                     { width: 540px; }    
+    .container-twelve .five.columns                     { width: 480px; }
+    .container-twelve .six.columns                         { width: 500px; }
+    .container-twelve .seven.columns                     { width: 740px; }    
     .container-twelve .eight.columns                     { width: 620px; }
     .container-twelve .nine.columns                     { width: 700px; }
-    .container-twelve .ten.columns                         { width: 780px; }    
+    .container-twelve .ten.columns                         { width: 1000px; }    
     .container-twelve .eleven.columns                     { width: 860px; }    
     .container-twelve .twelve.columns                     { width: 940px; }
     
@@ -237,7 +239,7 @@
     /* Note: Design for a width of 320px */
     
     @media only screen and (max-width: 767px) {
-        .container { width: 300px; }
+        .container { width: 360px; margin: 5px;}
         .columns, .column { margin: 0; }
         
         .container .one.column,
@@ -306,7 +308,7 @@
     /* Note: Design for a width of 480px */
     
     @media only screen and (min-width: 480px) and (max-width: 767px) {
-        .container { width: 420px; }
+        .container { width: 420px; margin:2px;}
         .columns, .column { margin: 0; }
         
         .container .one.column,
@@ -326,7 +328,7 @@
         .container .fifteen.columns,
         .container .sixteen.columns,
         .container .one-third.column, 
-        .container .two-thirds.column { width: 420px; }
+        .container .two-thirds.column { width: 420px; margin: 2px;}
 
         .container .one.column.panel,
         .container .two.columns.panel,
@@ -345,7 +347,7 @@
         .container .fifteen.columns.panel,
         .container .sixteen.columns.panel,
         .container .one-third.column.panel, 
-        .container .two-thirds.column.panel { width: 400px; }
+        .container .two-thirds.column.panel { width: 400px; margin: 2px;}
         
     }
      
@@ -384,6 +386,5 @@
       width: 0;
       height: 0;
     }
-    
     
     
