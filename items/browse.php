@@ -66,7 +66,7 @@ echo item_search_filters();
                     <?php endif; ?>
 
                     <span class="title">
-                    <?php echo link_to_item(); ?>
+                    <?php echo link_to_item(metadata('item', array('Dublin Core', 'Identifier')) . " - " . link_to_item()); ?>
 
                     <?php if(!$item->public): ?>
                     <?php echo __('(Private)'); ?>
@@ -105,7 +105,10 @@ echo item_search_filters();
                         : metadata('item', array('Dublin Core', 'Type'), array('snippet' => 35));
                     ?>
                 </td>
-                <td><?php echo format_date(metadata('item', 'added')); ?></td>
+                <td><?php echo format_date(metadata('item', 'added')); ?>
+                    <br>
+                    <b><?php echo get_db()->getTable('User')->find(metadata($item, "owner_id"))->name; ?></b>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
