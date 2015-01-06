@@ -4,31 +4,48 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'search'));
 $searchRecordTypes = get_search_record_types();
 ?>
 <?php echo search_filters(); ?>
+
 <?php if ($total_results): ?>
+
+<div id="search-filters" style="display:inline; float:none;">
+<ul><li><?php echo __('Total results: ');?> <?php echo $total_results; ?></li></ul>
+</div>
+
 <?php echo pagination_links(); ?>
+
+<?php foreach (loop('search_texts') as $searchText): ?>
+<?php endforeach; ?>
+
 <table id="search-results">
     <thead>
         <tr>
-            <th><?php echo __('Record Type');?></th>
+            <th><?php echo __('Item Type');?></th>
+            <th><?php echo __('Identifier');?></th>
+            <th><?php echo __('Subgenre');?></th>
             <th><?php echo __('Title');?></th>
         </tr>
     </thead>
     <tbody>
-        <?php $filter = new Zend_Filter_Word_CamelCaseToDash; ?>
         <?php foreach (loop('search_texts') as $searchText): ?>
         <?php $record = get_record_by_id($searchText['record_type'], $searchText['record_id']); ?>
-        <?php $recordType = $searchText['record_type']; ?>
-        <?php set_current_record($recordType, $record); ?>
-        <tr class="<?php echo strtolower($filter->filter($recordType)); ?>">
+        
+        <?php if ($searchRecordTypes[$searchText['record_type']] == "Item"):?>
+            <?php $itemtypename = metadata($record, 'Item Type Name') ? metadata($record, 'Item Type Name') : "";?>
+        <?php elseif ($searchRecordTypes[$searchText['record_type']] == __("File")):?>
+            <?php $itemtypename = "File"; ?>
+        <?php endif; ?>
+        <tr class="<?php echo $itemtypename; ?>">
             <td>
-                <?php echo $searchRecordTypes[$recordType]; ?>
+                <?php echo __($itemtypename); ?>
             </td>
-            <td>
-                <?php if ($recordImage = record_image($recordType, 'square_thumbnail')): ?>
-                    <?php echo link_to($record, 'show', $recordImage, array('class' => 'image')); ?>
-                <?php endif; ?>
-                <a href="<?php echo record_url($record, 'show'); ?>"><?php echo $searchText['title'] ? $searchText['title'] : '[Unknown]'; ?></a>
-            </td>
+            
+            <td><a href="<?php echo record_url($record, 'show'); ?>"><?php echo metadata($record, array('Dublin Core', 'Identifier')); ?></a></td>
+            
+            <td><?php if ($searchRecordTypes[$searchText['record_type']] == "Item"): ?>
+            <?php echo metadata($record, array('Item Type Metadata', 'Subgenre')) ? metadata($record, array('Item Type Metadata', 'Subgenre')) : ""; ?>
+            <?php endif; ?></td>
+
+            <td><a href="<?php echo record_url($record, 'show'); ?>"><?php echo $searchText['title'] ? $searchText['title'] : __('Untitled'); ?></a></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
